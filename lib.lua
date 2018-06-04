@@ -18,7 +18,7 @@ end
 
 --Get the client host
 function get_client_host()
-    CLIENT_HOST = ngx.var.host
+    CLIENT_HOST = ngx.var.server_name
     if CLIENT_HOST == nil then
        CLIENT_HOST = "unknown"
     end
