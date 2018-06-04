@@ -14,7 +14,7 @@ function white_ip_check()
         if IP_WHITE_RULE ~= nil then
             for _,rule in pairs(IP_WHITE_RULE) do
                 if rule ~= "" and rulematch(WHITE_IP,rule,"jo") then
-                    log_record('White_IP',ngx.var_request_uri,"_","_")
+                    --log_record('White_IP',ngx.var_request_uri,"_","_")
                     return true
                 end
             end
@@ -30,7 +30,7 @@ function white_host_check()
         if HOST_WHITE_RULE ~= nil then
             for _,rule in pairs(HOST_WHITE_RULE) do
                 if rule ~= "" and rulematch(WHITE_HOST,rule,"jo") then
-                    log_record('White_HOST',ngx.var_request_uri,"_","_")
+                    --log_record('White_HOST',ngx.var_request_uri,"_","_")
                     return true
                 end
             end
@@ -64,7 +64,7 @@ function white_url_check()
         local REQ_URI = ngx.var.request_uri
         if URL_WHITE_RULES ~= nil then
             for _,rule in pairs(URL_WHITE_RULES) do
-                if rule ~= "" and rulematch(REQ_URI,rule,"jo") then
+                --if rule ~= "" and rulematch(REQ_URI,rule,"jo") then
                     return true
                 end
             end
