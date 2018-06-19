@@ -86,8 +86,15 @@ function waf_output()
         ngx.redirect(config_waf_redirect_url, 301)
     else
         ngx.header.content_type = "text/html"
+        ngx.status = 405
+        ngx.say(config_output_html)
+        ngx.exit(ngx.status)
+
+        --[[
+        ngx.header.content_type = "text/html"
         ngx.status = ngx.HTTP_FORBIDDEN
         ngx.say(config_output_html)
         ngx.exit(ngx.status)
+        ]]--
     end
 end
