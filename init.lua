@@ -48,7 +48,9 @@ function black_ip_check()
                 if rule ~= "" and rulematch(BLACK_IP,rule,"jo") then
                     log_record('BlackList_IP',ngx.var_request_uri,"_","_")
                     if config_waf_enable == "on" then
-                        ngx.exit(403)
+                        --使用WAF拦截页面
+                        --ngx.exit(405)
+                        waf_output()
                         return true
                     end
                 end
@@ -64,7 +66,7 @@ function white_url_check()
         local REQ_URI = ngx.var.request_uri
         if URL_WHITE_RULES ~= nil then
             for _,rule in pairs(URL_WHITE_RULES) do
-                --if rule ~= "" and rulematch(REQ_URI,rule,"jo") then
+                if rule ~= "" and rulematch(REQ_URI,rule,"jo") then
                     return true
                 end
             end
@@ -85,7 +87,9 @@ function cc_attack_check()
             if req > CCcount then
                 log_record('CC_Attack',ngx.var.request_uri,"-","-")
                 if config_waf_enable == "on" then
-                    ngx.exit(403)
+                    --使用WAF拦截页面
+                    --ngx.exit(403)
+                    waf_output()
                 end
             else
                 limit:incr(CC_TOKEN,1)
